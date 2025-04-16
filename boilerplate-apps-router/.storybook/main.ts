@@ -1,17 +1,20 @@
+import type { Configuration as WebpackConfig } from 'webpack';
+
 const config = {
-  staticDirs: ["../public"],
-  stories: ["..src/components/**/stories.tsx"],
-  addons: ["@storybook/addon-essentials"],
+  staticDirs: ['../public'],
+  stories: ['../src/components/**/stories.tsx'], // 👈 corrigido caminho
+  addons: ['@storybook/addon-essentials'],
   framework: {
-    name: "@storybook/experimental-nextjs-vite",
-    options: {},
+    name: '@storybook/nextjs',
+    options: {}
   },
   docs: {
-    autodocs: "tag",
+    autodocs: true
   },
-  webpackFinal: (config) => {
-    config.resolve.modules.push(`${process.cwd()}/src`);
+  webpackFinal: (config: WebpackConfig) => {
+    config.resolve!.modules!.push(`${process.cwd()}/src`);
     return config;
-  },
+  }
 };
+
 export default config;
